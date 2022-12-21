@@ -33,8 +33,8 @@ class _PlayScreenState extends State<PlayScreen> {
   late String a, b, c, d;
   bool isLoaded = false;
   Timer? timer;
-  int seconds = 10;
-  int maxsecond = 10;
+  int seconds = 30;
+  int maxsecond = 30;
   List<ProfileObject> profile = [];
   List<ChuDeObject> chuDe = [];
   late String ngayHienTai;
@@ -93,7 +93,7 @@ class _PlayScreenState extends State<PlayScreen> {
     currentQuestionIndex = 0;
     resetColors();
     timer?.cancel();
-    seconds = 10;
+    seconds = 30;
     points = 0;
     is5050Used = false;
     isSwitchUsed = false;
@@ -108,8 +108,8 @@ class _PlayScreenState extends State<PlayScreen> {
     currentQuestionIndex++;
     resetColors();
     timer!.cancel();
-    seconds = 10;
-    maxsecond = 10;
+    seconds = 30;
+    maxsecond = 30;
     startTimer();
   }
 
@@ -119,7 +119,6 @@ class _PlayScreenState extends State<PlayScreen> {
     getNgay();
     loadThongTin();
     loadChuDe();
-
     startTimer();
   }
 

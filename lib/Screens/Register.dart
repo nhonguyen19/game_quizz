@@ -119,6 +119,7 @@ class _RegisterState extends State<Register> {
                 padding: EdgeInsets.fromLTRB(20, 10, 20, 20),
                 child: ElevatedButton(
                     onPressed: () async {
+                    
                       try {
                         List<ProfileObject> lsProfile=[];
                         CollectionReference users =
@@ -132,7 +133,6 @@ class _RegisterState extends State<Register> {
                                   'phone': _txtPhone.text,
                                 }))
                             .then((value) {
-                         thongbao("Đăng kí thành công");
                           nextpage(context, LoginApp());
                         });
                       } on FirebaseAuthException catch (error) {

@@ -5,10 +5,13 @@ class LichSuProvider {
   static Future<List<LichSuObject>> getDataByAll() async {
     List<LichSuObject> lichSu = [];
     QuerySnapshot snapshot;
-    snapshot = await FirebaseFirestore.instance.collection('lichsu').get();
+    snapshot = await FirebaseFirestore.instance
+        .collection('lichsu')
+        .orderBy('tongDiem', descending: true)
+        .get();
     lichSu = snapshot.docs
         .map((json) =>
-            LichSuObject.fromJson(json.data() as Map<String, dynamic>))
+            LichSuObject.fromJson(json.data() as Map<String, dynamic>)) 
         .toList();
     return lichSu;
   }

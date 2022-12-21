@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:game_quizz/object/cau_hoi_object.dart';
 import 'package:game_quizz/object/chu_de_object.dart';
 import 'package:game_quizz/object/profile_object.dart';
+
 import 'package:game_quizz/provider/cau_hoi_provider.dart';
 import 'package:game_quizz/provider/chu_de_provider.dart';
 import 'package:game_quizz/provider/profile_provider.dart';
@@ -14,6 +15,7 @@ import 'package:game_quizz/const/text_style.dart';
 import 'package:game_quizz/play/components/custome_alert.dart';
 import 'package:game_quizz/play/components/helping_icons_row.dart';
 import 'package:game_quizz/screens/nextpage.dart';
+import 'package:intl/intl.dart';
 
 class PlayScreen extends StatefulWidget {
   String email;
@@ -35,7 +37,7 @@ class _PlayScreenState extends State<PlayScreen> {
   int maxsecond = 10;
   List<ProfileObject> profile = [];
   List<ChuDeObject> chuDe = [];
-  late DateTime ngayHienTai;
+  late String ngayHienTai;
   int soCauDung = 0;
   int soCauSai = 0;
   int heart = 3;
@@ -97,6 +99,10 @@ class _PlayScreenState extends State<PlayScreen> {
     isSwitchUsed = false;
   }
 
+  void getNgay() {
+    ngayHienTai = DateFormat('dd/MM/yyyy').format(ngay);
+  }
+
   gotoNextQuestion() {
     isLoaded = false;
     currentQuestionIndex++;
@@ -109,10 +115,12 @@ class _PlayScreenState extends State<PlayScreen> {
 
   @override
   void initState() {
+    super.initState();
+    getNgay();
     loadThongTin();
     loadChuDe();
+
     startTimer();
-    super.initState();
   }
 
   @override
@@ -123,7 +131,7 @@ class _PlayScreenState extends State<PlayScreen> {
 
   Future<void> addLichSu() async => lichsu.add({
         'tenNguoiChoi': profile[0].name,
-        'ngayChoi': ngay.toString(),
+        'ngayChoi': ngayHienTai,
         'soCauDung': soCauDung,
         'soCauSai': soCauSai,
         'tongDiem': points,
@@ -140,7 +148,7 @@ class _PlayScreenState extends State<PlayScreen> {
               nextpage(context, HomeScreen(email: widget.email));
             },
             title: 'Ồ đã hết lượt chơi rồi!',
-            desc: 'Bạn có $points vàng',
+            desc: 'Bạn có $points điểm',
             text: 'Okay')
         .show();
   }
@@ -300,7 +308,7 @@ class _PlayScreenState extends State<PlayScreen> {
                                                 .toString() ==
                                             a) {
                                           optionsColor1[index] = Colors.green;
-                                          points += 1;
+                                          points += 100;
                                           soCauDung++;
                                         } else {
                                           optionsColor1[index] = Colors.red;
@@ -342,7 +350,7 @@ class _PlayScreenState extends State<PlayScreen> {
                                                   title:
                                                       'Số câu đúng: $soCauDung.\n Số câu sai: $soCauSai',
                                                   desc:
-                                                      'Chúc mừng bạn đã có $points vàng. ',
+                                                      'Chúc mừng bạn đã có $points điểm. ',
                                                   text: 'Màn hình chính')
                                               .show();
                                         }
@@ -372,7 +380,7 @@ class _PlayScreenState extends State<PlayScreen> {
                                                 .toString() ==
                                             b) {
                                           optionsColor2[index] = Colors.green;
-                                          points += 1;
+                                          points += 100;
                                           soCauDung++;
                                         } else {
                                           optionsColor2[index] = Colors.red;
@@ -409,7 +417,7 @@ class _PlayScreenState extends State<PlayScreen> {
                                                   title:
                                                       'Số câu đúng: $soCauDung.\n Số câu sai: $soCauSai',
                                                   desc:
-                                                      'Chúc mừng bạn đã có $points vàng. Hãy thử lại nào.',
+                                                      'Chúc mừng bạn đã có $points điểm. Hãy thử lại nào.',
                                                   text: 'Đồng ý')
                                               .show();
                                         }
@@ -439,7 +447,7 @@ class _PlayScreenState extends State<PlayScreen> {
                                                 .toString() ==
                                             c) {
                                           optionsColor3[index] = Colors.green;
-                                          points += 1;
+                                          points += 100;
                                           soCauDung++;
                                         } else {
                                           optionsColor3[index] = Colors.red;
@@ -476,7 +484,7 @@ class _PlayScreenState extends State<PlayScreen> {
                                                   title:
                                                       'Số câu đúng: $soCauDung.\n Số câu sai: $soCauSai',
                                                   desc:
-                                                      'Chúc mừng bạn đã có $points vàng. Hãy thử lại nào.',
+                                                      'Chúc mừng bạn đã có $points điểm. Hãy thử lại nào.',
                                                   text: 'Đồng ý')
                                               .show();
                                         }
@@ -506,7 +514,7 @@ class _PlayScreenState extends State<PlayScreen> {
                                                 .toString() ==
                                             d) {
                                           optionsColor4[index] = Colors.green;
-                                          points += 1;
+                                          points += 100;
                                           soCauDung++;
                                         } else {
                                           optionsColor4[index] = Colors.red;
@@ -543,7 +551,7 @@ class _PlayScreenState extends State<PlayScreen> {
                                                   title:
                                                       'Số câu đúng: $soCauDung.\n Số câu sai: $soCauSai',
                                                   desc:
-                                                      'Chúc mừng bạn đã có $points vàng. Hãy thử lại nào.',
+                                                      'Chúc mừng bạn đã có $points điểm. Hãy thử lại nào.',
                                                   text: 'Đồng ý')
                                               .show();
                                         }
@@ -650,7 +658,7 @@ class _PlayScreenState extends State<PlayScreen> {
                                                 title:
                                                     'Số câu đúng: $soCauDung.\n Số câu sai: $soCauSai',
                                                 desc:
-                                                    'Chúc mừng bạn đã có $points vàng. Hãy thử lại nào.',
+                                                    'Chúc mừng bạn đã có $points điểm. Hãy thử lại nào.',
                                                 text: 'Xem chi tiết')
                                             .show();
                                       }
